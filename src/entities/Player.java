@@ -15,9 +15,11 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import utilz.LoadSave;
+
 public class Player extends Entity {
 	private BufferedImage[][] animations;
-	private int aniTick, aniIndex, aniSpeed = 45;
+	private int aniTick, aniIndex, aniSpeed = 35;
 	private int playerAction = WALKING;
 	private boolean moving = false, attacking = false;
 	private boolean left, up, right, down;
@@ -101,27 +103,14 @@ public class Player extends Entity {
 	}
 	
 	private void loadAnimations() {
-		InputStream is = getClass().getResourceAsStream("/player_sprite.png");
 		
-		try {
-			BufferedImage img = ImageIO.read(is);
+			BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
 			
 			animations = new BufferedImage[9][8];
 			
 			for(int i=0; i < animations.length; i++)
-				for(int j=0; j < animations[i].length; j++) {
-					animations[i][j] = img.getSubimage(j*32, i*32, 32, 32);
-				}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
+				for(int j=0; j < animations[i].length; j++)
+					animations[i][j] = img.getSubimage(j*32, i*32, 32, 32);	
 	}
 	
 	public void setAttacking(boolean attacking) {
