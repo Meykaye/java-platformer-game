@@ -8,17 +8,22 @@ I aim to build a classic 2D platformer game using Java. The game will involve a 
 
 ## Development Stages as of now
 
-### 1. Project Setup and Basic Player Movement
+### 1. Project Setup and Basic Player Movement (17/8/2023)
 
 - Created a new Java project with the help of Eclipse IDE
 - Set up the project structure and added necessary resource directories.
 - Implemented the basic player character and enabled left/right movement along with mouse movement.
 
-### 2. Player Animation
+### 2. Player Animation (23/8/2023)
 
 - Added animation in a sprite of size 256x288
 - Implemented only 3 functional animations
 - Plan on expanding animations for the player in the future
+
+### 3. Level Creation (25/8/2023)
+
+- Testing levels with different collision systems as of now
+- Using Red values from RGB for level creation (prototype)
 
 ## Future plans
 
