@@ -25,9 +25,10 @@ I aim to build a classic 2D platformer game using Java. The game will involve a 
 - Testing levels with different collision systems as of now
 - Using Red values from RGB for level creation (prototype)
 
-### 4. Collision System (25/8/2023)
+### 4. Collision and Gravity System (25/8/2023)
 
 - Added collision to the Player model
+- Added Gravity along with animations that go along with Gravity
 
 ## Future plans
 
