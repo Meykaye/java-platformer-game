@@ -13,8 +13,6 @@ public class Game implements Runnable{
 	private Thread gameThread;
 	private final int FPS_SET = 160;
 	private final int UPS_SET = 200;
-	private Player player;
-	private LevelHandler levelHandler;
 	
 	public static final int TILES_DEFAULT_SIZE = 32;
 	public static final float SCALE = 1.5f;
