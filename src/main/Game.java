@@ -3,6 +3,7 @@ package main;
 import java.awt.Graphics;
 
 import entities.Player;
+import gamestates.Gamestates;
 import levels.LevelHandler;
 
 public class Game implements Runnable{
@@ -47,13 +48,33 @@ public class Game implements Runnable{
 	}
 	
 	private void update() {
-		player.update();
-		levelHandler.update();
+		
+		switch(Gamestates.states) {
+		case MENU:
+			break;
+		case PLAYING:
+			player.update();
+			levelHandler.update();
+			break;
+		default:
+			break;
+		}
+		
 	}
 
 	public void render(Graphics g) {
-		levelHandler.draw(g);
-		player.render(g);
+		
+		switch(Gamestates.states) {
+		case MENU:
+			break;
+		case PLAYING:
+			levelHandler.draw(g);
+			player.render(g);
+			break;
+		default:
+			break;
+		}
+		
 	}
 	
 	@Override

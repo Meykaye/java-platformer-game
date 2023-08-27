@@ -14,14 +14,14 @@ public class Player extends Entity {
 	private int playerAction = IDLE;
 	private boolean moving = false, attacking = false;
 	private boolean left, up, right, down, jump;
-	private float playerSpeed = 2.0f;
+	private float playerSpeed = 1.5f;
 	private int[][] lvlData; 
 	private float xDrawOffset = 6 * Game.SCALE;
 	private float yDrawOffset = 4 * Game.SCALE;
 	
 	//Jumping and Gravity
 	private float airSpeed = 0f;
-	private float gravity = 0.05f * Game.SCALE;
+	private float gravity = 0.04f * Game.SCALE;
 	private float jumpSpeed = -2.25f * Game.SCALE;
 	private float fallSpeedAfterCollision = 0.5f * Game.SCALE;
 	private boolean inAir = false;
