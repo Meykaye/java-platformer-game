@@ -12,6 +12,7 @@ public class Playing extends States implements Statemethods{
 
 	private Player player;
 	private LevelHandler levelHandler;
+	private boolean paused;
 	
 	public Playing(Game game) {
 		super(game);
@@ -24,43 +25,36 @@ public class Playing extends States implements Statemethods{
 		player.loadLvlData(levelHandler.getCurrentLevel().getLevelData());
 	}
 
-	@Override
 	public void update() {
 		levelHandler.update();
 		player.update();
 	}
 
-	@Override
 	public void draw(Graphics g) {
 		levelHandler.draw(g);
 		player.render(g);
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1)
 			player.setAttacking(true);
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_W:
@@ -78,10 +72,11 @@ public class Playing extends States implements Statemethods{
 		case KeyEvent.VK_SPACE:
 			player.setJump(true);
 			break;
+		case KeyEvent.VK_BACK_SPACE:
+			Gamestates.states = Gamestates.MENU;
 		}
 	}
 
-	@Override
 	public void keyReleased(KeyEvent e) {
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_W:

@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class GameWindow {
 	
 	private JFrame jFrame;
-	public GameWindow(GamePanel gamePanel) {
+	public GameWindow(final GamePanel gamePanel) {
 		
 		jFrame = new JFrame(); 
 		
@@ -20,12 +20,10 @@ public class GameWindow {
 		jFrame.setVisible(true);
 		jFrame.addWindowFocusListener(new WindowFocusListener() {
 
-			@Override
 			public void windowGainedFocus(WindowEvent e) {
 				
 			}
 
-			@Override
 			public void windowLostFocus(WindowEvent e) {
 				gamePanel.getGame().windowFocusLost();
 				

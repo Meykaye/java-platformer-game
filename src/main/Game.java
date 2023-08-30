@@ -2,8 +2,7 @@ package main;
 
 import java.awt.Graphics;
 import gamestates.Gamestates;
-import gamestates.Menu;
-import gamestates.Playing;
+import gamestates.*;
 
 public class Game implements Runnable{
 	
@@ -53,7 +52,10 @@ public class Game implements Runnable{
 		case PLAYING:
 			playing.update();
 			break;
+		case OPTIONS:
+		case QUIT:
 		default:
+			System.exit(0);
 			break;
 		}
 		
@@ -74,7 +76,6 @@ public class Game implements Runnable{
 		
 	}
 	
-	@Override
 	public void run() {
 		
 		double timePerFrame = 1000000000.0 / FPS_SET; 
