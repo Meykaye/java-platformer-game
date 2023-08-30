@@ -30,6 +30,12 @@ I aim to build a classic 2D platformer game using Java. The game will involve a 
 - Added collision to the Player model
 - Added Gravity along with animations that go along with Gravity
 
+### 5. Background and Images (30/8/2023)
+
+- Added Main Menu buttons before the actual game launch
+- Added a placeholder for Menu Background
+- Developing pause menu screen
+
 ## Future plans
 
 I still plan on processing new ideas to add in my current game and focus on continuous development for the game
