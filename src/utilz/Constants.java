@@ -11,6 +11,10 @@ public class Constants {
 			public static final int B_WIDTH = (int)(B_WIDTH_DEFAULT * Game.SCALE);
 			public static final int B_HEIGHT = (int)(B_HEIGHT_DEFAULT * Game.SCALE);
 		}
+		public static class PauseButtons {
+			public static final int SOUND_SIZE_DEFAULT = 42;
+			public static final int SOUND_SIZE = (int) (SOUND_SIZE_DEFAULT * Game.SCALE);
+		}
 	}
 	
 	public static class Directions {
@@ -21,15 +25,6 @@ public class Constants {
 	}
 
 	public static class  PlayerConstants {
-//		public static final int IDLE = 0;
-//		public static final int WALKING = 2;
-//		public static final int RUNNING = 3; 
-//		public static final int CROUCHING = 4;
-//		public static final int JUMPING = 5;
-//		public static final int VANISHING = 6;
-//		public static final int DYING = 7;
-//		public static final int ATTACKING = 8; 
-//		public static final int FALLING = 9;
 		
 		public static final int IDLE = 0;
 		public static final int WALK = 2;
