@@ -4,7 +4,7 @@ This is a repository to track my personal progress in developing a 2D platformer
 
 ## Overview
 
-I aim to build a classic 2D platformer game using Java. The game will involve a player character navigating through various levels, jumping between platforms, avoiding enemies. I intend to do this project as a hobby as I like to talk and design related to gaming.
+I aim to build a classic 2D platformer game using Java. The game will involve a player character navigating through various levels, jumping between platforms and avoiding enemies. I intend to do this project as a hobby as I like to take interest in gaming.
 
 ## Development Stages as of now
 
@@ -29,6 +29,12 @@ I aim to build a classic 2D platformer game using Java. The game will involve a 
 
 - Added collision to the Player model
 - Added Gravity along with animations that go along with Gravity
+
+### 5. Background and Images (30/8/2023)
+
+- Added Main Menu buttons before the actual game launch
+- Added a placeholder for Menu Background
+- Developing pause menu screen
 
 ## Future plans
 
