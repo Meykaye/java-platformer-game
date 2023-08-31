@@ -31,7 +31,7 @@ I aim to build a classic 2D platformer game using Java. The game will involve a 
 - Added a placeholder for Menu Background
 - Developing pause menu screen
 
-### 5. Pause Menu and buttons (31/8/2023)
+### 5. Pause Menu and Buttons (31/8/2023)
 
 - Added Pause menu and buttons
 - Buttons interact with mouse clicks and hovers 
