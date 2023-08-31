@@ -13,7 +13,7 @@ public class Playing extends States implements Statemethods{
 
 	private Player player;
 	private LevelHandler levelHandler;
-	private boolean paused = true;
+	private boolean paused = false;
 	private PauseOverlay pauseOverlay;
 	
 	public Playing(Game game) {
@@ -25,21 +25,26 @@ public class Playing extends States implements Statemethods{
 		levelHandler = new LevelHandler(game);
 		player = new Player(200, 200,(int) (32*Game.SCALE),(int) (32*Game.SCALE));
 		player.loadLvlData(levelHandler.getCurrentLevel().getLevelData());
-		pauseOverlay = new PauseOverlay();
+		pauseOverlay = new PauseOverlay(this);
 	}
 
 	public void update() {
-		levelHandler.update();
-		player.update();
+		if(!paused) {
+			levelHandler.update();
+			player.update();
+		}
 		
-		pauseOverlay.update();
+		else {
+			pauseOverlay.update();
+		}
 	}
 
 	public void draw(Graphics g) {
 		levelHandler.draw(g);
 		player.render(g);
 		
-		pauseOverlay.draw(g);
+		if(paused)
+			pauseOverlay.draw(g);
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -79,8 +84,9 @@ public class Playing extends States implements Statemethods{
 		case KeyEvent.VK_SPACE:
 			player.setJump(true);
 			break;
-		case KeyEvent.VK_BACK_SPACE:
-			Gamestates.states = Gamestates.MENU;
+		case KeyEvent.VK_ESCAPE:
+			paused = !paused;
+			break; 
 		}
 	}
 
@@ -103,6 +109,10 @@ public class Playing extends States implements Statemethods{
 			break;
 		}
 		
+	}
+	
+	public void unpauseGame() {
+		paused = false;
 	}
 	
 	public void windowFocusLost() {
