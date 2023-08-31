@@ -1,4 +1,4 @@
-# Personal Java Platformer Game Progress
+# Java Platformer Game
 
 This is a repository to track my personal progress in developing a 2D platformer game using Java.
 
@@ -20,21 +20,21 @@ I aim to build a classic 2D platformer game using Java. The game will involve a 
 - Implemented only 3 functional animations
 - Plan on expanding animations for the player in the future
 
-### 3. Level Creation (24/8/2023)
-
-- Testing levels with different collision systems as of now
-- Using Red values from RGB for level creation (prototype)
-
-### 4. Collision and Gravity System (25/8/2023)
+### 3. Collision and Gravity System (25/8/2023)
 
 - Added collision to the Player model
 - Added Gravity along with animations that go along with Gravity
 
-### 5. Background and Images (30/8/2023)
+### 4. Background and Images (30/8/2023)
 
 - Added Main Menu buttons before the actual game launch
 - Added a placeholder for Menu Background
 - Developing pause menu screen
+
+### 5. Pause Menu and buttons (31/8/2023)
+
+- Added Pause menu and buttons
+- Buttons interact with mouse clicks and hovers 
 
 ## Future plans
 
