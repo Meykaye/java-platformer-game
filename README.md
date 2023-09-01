@@ -27,7 +27,6 @@ I aim to build a classic 2D platformer game using Java. The game will involve a 
 
 ### 4. Background and Images (30/8/2023)
 
-- Added Main Menu buttons before the actual game launch
 - Added a placeholder for Menu Background
 - Developing pause menu screen
 
