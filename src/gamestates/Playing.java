@@ -1,5 +1,6 @@
 package gamestates;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -8,6 +9,7 @@ import entities.Player;
 import levels.LevelHandler;
 import main.Game;
 import ui.PauseOverlay;
+import utilz.LoadSave;
 
 public class Playing extends States implements Statemethods{
 
@@ -15,6 +17,12 @@ public class Playing extends States implements Statemethods{
 	private LevelHandler levelHandler;
 	private boolean paused = false;
 	private PauseOverlay pauseOverlay;
+	private int xLvlOffset;
+	private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
+	private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
+	private int lvlTilesWide = LoadSave.GetLevelData()[0].length; //getting width from the function
+	private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
+	private int maxLvlOffsetX = maxTilesOffset * Game.TILES_SIZE;
 	
 	public Playing(Game game) {
 		super(game);
@@ -32,6 +40,7 @@ public class Playing extends States implements Statemethods{
 		if(!paused) {
 			levelHandler.update();
 			player.update();
+			checkBorder();
 		}
 		
 		else {
@@ -39,12 +48,33 @@ public class Playing extends States implements Statemethods{
 		}
 	}
 
-	public void draw(Graphics g) {
-		levelHandler.draw(g);
-		player.render(g);
+	private void checkBorder() {
+		int playerX = (int) player.getHitbox().x;
+		int difference = playerX - xLvlOffset;
 		
-		if(paused)
+		if(difference > rightBorder)
+			xLvlOffset += difference - rightBorder;
+		
+		else if(difference < leftBorder)
+			xLvlOffset += difference - leftBorder;
+		
+		
+		if(xLvlOffset > maxLvlOffsetX)
+			xLvlOffset = maxLvlOffsetX;
+		
+		else if(xLvlOffset < 0)
+			xLvlOffset = 0;
+	}
+
+	public void draw(Graphics g) {
+		levelHandler.draw(g, xLvlOffset);
+		player.render(g, xLvlOffset);
+		
+		if(paused) {
+			g.setColor(new Color(0 ,0 ,0, 130));
+			g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
 			pauseOverlay.draw(g);
+		}
 	}
 
 	public void mouseClicked(MouseEvent e) {
