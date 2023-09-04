@@ -4,6 +4,18 @@ import main.Game;
 
 public class Constants {
 	
+	public static class Environment {
+		public static final int BACKGROUNDIMG_2_DEFAULT_WIDTH = 640;
+		public static final int BACKGROUNDIMG_2_DEFAULT_HEIGHT = 360;
+		public static final int BACKGROUNDIMG_3_DEFAULT_WIDTH = 640;
+		public static final int BACKGROUNDIMG_3_DEFAULT_HEIGHT = 360;
+		
+		public static final int BACKGROUNDIMG_2_WIDTH = (int) (BACKGROUNDIMG_2_DEFAULT_WIDTH * Game.SCALE);
+		public static final int BACKGROUNDIMG_2_HEIGHT = (int) (BACKGROUNDIMG_2_DEFAULT_HEIGHT * Game.SCALE);
+		public static final int BACKGROUNDIMG_3_WIDTH = (int) (BACKGROUNDIMG_3_DEFAULT_WIDTH * Game.SCALE);
+		public static final int BACKGROUNDIMG_3_HEIGHT = (int) (BACKGROUNDIMG_3_DEFAULT_HEIGHT * Game.SCALE);
+	}
+	
 	public static class UI {
 		public static class Buttons {
 			public static final int B_WIDTH_DEFAULT = 140;
