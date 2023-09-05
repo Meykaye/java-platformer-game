@@ -25,7 +25,7 @@ public class Playing extends States implements Statemethods{
 	private int lvlTilesWide = LoadSave.GetLevelData()[0].length; //getting width from the function
 	private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
 	private int maxLvlOffsetX = maxTilesOffset * Game.TILES_SIZE;
-	private BufferedImage backgroundImg1, backgroundImg2, backgroundImg3; // background images
+	private BufferedImage backgroundImg1, backgroundImg2, backgroundImg3, dripstone; // background images
 	
 	public Playing(Game game) {
 		super(game);
@@ -34,6 +34,7 @@ public class Playing extends States implements Statemethods{
 		backgroundImg1 = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUNDIMG_1);
 		backgroundImg2 = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUNDIMG_2);
 		backgroundImg3 = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUNDIMG_3);
+		dripstone = LoadSave.GetSpriteAtlas(LoadSave.DRIPSTONE);
 	}
 	
 	private void initClasses() {
@@ -94,6 +95,9 @@ public class Playing extends States implements Statemethods{
 		
 		for(int i=0; i<3; i++)
 			g.drawImage(backgroundImg3, i * BACKGROUNDIMG_3_WIDTH - (int)(xLvlOffset * 0.7), (int) (90 * Game.SCALE), BACKGROUNDIMG_3_WIDTH, BACKGROUNDIMG_3_HEIGHT, null);
+	
+		for(int i=0; i<3; i++)
+			g.drawImage(dripstone, i * DRIPSTONE_WIDTH - (int) (xLvlOffset * 0.9), (int) (80 * Game.SCALE), DRIPSTONE_WIDTH, DRIPSTONE_HEIGHT, null);
 	}
 
 	public void mouseClicked(MouseEvent e) {

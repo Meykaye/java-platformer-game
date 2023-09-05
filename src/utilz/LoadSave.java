@@ -25,6 +25,7 @@ public class LoadSave {
 	public static final String BACKGROUNDIMG_1 = "bg_1.png";
 	public static final String BACKGROUNDIMG_2 = "bg_2.png";
 	public static final String BACKGROUNDIMG_3 = "bg_3.png";
+	public static final String DRIPSTONE = "dripstone.png";
 
 	
 	public static BufferedImage GetSpriteAtlas(String fileName) {
