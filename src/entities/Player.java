@@ -62,7 +62,7 @@ public class Player extends Entity {
 		int startAni = playerAction;
 		
 		if(moving)
-			playerAction = WALK;
+			playerAction = RUN;
 		else
 			playerAction = IDLE;
 		

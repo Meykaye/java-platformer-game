@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import entities.Monster;
 import main.Game;
+import static utilz.Constants.EnemyConstants.MONSTER;
 
 public class LoadSave {
 	
@@ -26,6 +29,7 @@ public class LoadSave {
 	public static final String BACKGROUNDIMG_2 = "bg_2.png";
 	public static final String BACKGROUNDIMG_3 = "bg_3.png";
 	public static final String DRIPSTONE = "dripstone.png";
+	public static final String MONSTER_SPRITE = "slime_sprite.png";
 
 	
 	public static BufferedImage GetSpriteAtlas(String fileName) {
@@ -47,6 +51,20 @@ public class LoadSave {
 				}
 		}
 		return img;
+	}
+	
+	public static ArrayList<Monster> getMonsters() {
+		BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
+		ArrayList<Monster> list = new ArrayList<>();
+		
+		for(int j=0; j < img.getHeight(); j++)
+			for(int i=0; i < img.getWidth(); i++) {
+				Color color = new Color(img.getRGB(i, j));
+				int value = color.getGreen();
+				if(value == MONSTER)
+					list.add(new Monster(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+			}
+		return list;
 	}
 	
 	public static int[][] GetLevelData() {

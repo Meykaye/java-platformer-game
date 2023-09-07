@@ -4,6 +4,44 @@ import main.Game;
 
 public class Constants {
 	
+	public static class EnemyConstants {
+		public static final int MONSTER = 0;
+		
+		public static final int IDLE = 0;
+		public static final int WALKING = 4;
+		public static final int ATTACKING = 3;
+		public static final int HITTING = 2;
+		public static final int DYING = 1;
+		
+//		public static final int IDLE = 0;
+//		public static final int ATTACKING = 1;
+//		public static final int HITTING = 2;
+//		public static final int DYING = 3;
+		
+		
+		public static final int MONSTER_DEFAULT_WIDTH = 32;
+		public static final int MONSTER_DEFAULT_HEIGHT = 32;
+		
+		public static final int MONSTER_WIDTH = (int) (MONSTER_DEFAULT_WIDTH * Game.SCALE);
+		public static final int MONSTER_HEIGHT = (int) (MONSTER_DEFAULT_HEIGHT * Game.SCALE);
+		
+		public static int GetSpriteAmt(int enemy_type, int enemy_state) {
+			switch(enemy_type) {
+			case MONSTER:
+				switch(enemy_state) {
+				case IDLE:
+				case HITTING:
+				case DYING:
+				case WALKING:
+					return 4;
+				case ATTACKING:
+					return 5;
+				}
+			}
+			return 0;
+		}
+	}
+	
 	public static class Environment {
 		public static final int BACKGROUNDIMG_2_DEFAULT_WIDTH = 640;
 		public static final int BACKGROUNDIMG_2_DEFAULT_HEIGHT = 360;
