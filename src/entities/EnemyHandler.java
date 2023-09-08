@@ -26,19 +26,20 @@ public class EnemyHandler {
 		
 	}
 
-	public void update() {
-		for(Monster s : monsters)
-			s.update();
+	public void update(int[][] lvlData, Player player) {
+		for(Monster m : monsters)
+			m.update(lvlData, player);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
-		drawSkeletons(g, xLvlOffset);
+		drawMonsters(g, xLvlOffset);
 	}
 	
-	private void drawSkeletons(Graphics g, int xLvlOffset) {
-		for(Monster s : monsters)
-			g.drawImage(slimeArr[s.getEnemyState()][s.getAniIndex()], (int) s.getHitbox().x - xLvlOffset, (int) s.getHitbox().y, MONSTER_WIDTH, MONSTER_HEIGHT, null);
-		
+	private void drawMonsters(Graphics g, int xLvlOffset) {
+		for(Monster m : monsters) {
+			g.drawImage(slimeArr[m.getEnemyState()][m.getAniIndex()], (int) (m.getHitbox().x - MONSTER_DRAWOFFSET_X) - xLvlOffset, (int) (m.getHitbox().y - MONSTER_DRAWOFFSET_Y), MONSTER_WIDTH, MONSTER_HEIGHT, null);
+			//m.drawHitbox(g, xLvlOffset);
+		}
 	}
 
 	private void loadEnemyImgs() {
