@@ -8,15 +8,15 @@ import main.Game;
 
 public abstract class Enemy extends Entity{
 	protected int aniIndex, enemyState, enemyType;
-	protected int aniTick, aniSpeed = 40;
+	protected int aniTick, aniSpeed = 25;
 	protected boolean firstUpdate = true;
 	protected boolean inAir;
 	protected float fallSpeed; 
 	protected float gravity = 0.04f * Game.SCALE;
-	protected float walkSpeed = 0.35f * Game.SCALE;
+	protected float walkSpeed = 0.2f * Game.SCALE;
 	protected float walkDir = LEFT;
 	protected int tileY;
-	protected float attackRange = 32;
+	protected float attackRange = 33;
 	
 	public Enemy(float x, float y, int width, int height, int enemyType) {
 		super(x, y, width, height);

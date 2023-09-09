@@ -8,7 +8,7 @@ public class Monster extends Enemy{
 
 	public Monster(float x, float y) {
 		super(x, y, MONSTER_WIDTH, MONSTER_HEIGHT, MONSTER);
-		initHitbox(x, y, (int)(26 * Game.SCALE), (int)(14 * Game.SCALE));
+		initHitbox(x, y, (int)(18 * Game.SCALE), (int)(12 * Game.SCALE));
 	}
 	
 	public void update(int[][] lvlData, Player player) {

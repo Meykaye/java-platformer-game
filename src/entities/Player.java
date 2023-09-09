@@ -2,6 +2,8 @@ package entities;
 
 import static utilz.HelpMethods.*;
 import static utilz.Constants.PlayerConstants.*;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -10,11 +12,11 @@ import utilz.LoadSave;
 
 public class Player extends Entity {
 	private BufferedImage[][] animations;
-	private int aniTick, aniIndex, aniSpeed = 35;
+	private int aniTick, aniIndex, aniSpeed = 30;
 	private int playerAction = IDLE;
 	private boolean moving = false, attacking = false;
 	private boolean left, up, right, down, jump;
-	private float playerSpeed = 1f * Game.SCALE;
+	private float playerSpeed = 0.95f * Game.SCALE;
 	private int[][] lvlData; 
 	private float xDrawOffset = 8 * Game.SCALE;
 	private float yDrawOffset = 5 * Game.SCALE;
@@ -26,6 +28,23 @@ public class Player extends Entity {
 	private float fallSpeedAfterCollision = 0.5f * Game.SCALE;
 	private boolean inAir = false;
 	
+	//health bar UI
+	private BufferedImage statusBarImg;
+	private Color healthRed = new Color(161,55,55);
+	
+	private int statusBarHeight = (int) (58 * Game.SCALE);
+	private int statusBarWidth = (int) (192 * Game.SCALE);
+	private int statusBarX = (int) (10 * Game.SCALE);
+	private int statusBarY = (int) (10 * Game.SCALE);
+	private int healthBarWidth = (int) (150* Game.SCALE);
+	private int healthBarHeight = (int) (4 * Game.SCALE);
+	private int healthBarXStart = (int) (34 * Game.SCALE);
+	private int healthBarYStart = (int) (14* Game.SCALE);
+	
+	private int maxHealth = 100;
+	private int currentHealth = 100;
+	private int healthWidth = healthBarWidth;
+	
 	public Player(float x, float y, int width, int height) {
 		super(x, y, width, height);
 		loadAnimations();
@@ -34,14 +53,28 @@ public class Player extends Entity {
 	}
 	
 	public void update() {
+		updateHealthBar();
 		updateAnimationTick();
 		setAnimation();
 		updatePos();
 	}
 	
+	private void updateHealthBar() {
+		healthWidth = (int) ((currentHealth / (float) maxHealth) * healthBarWidth);
+		
+	}
+
 	public void render(Graphics g, int lvlOffset) {
 		g.drawImage(animations[playerAction][aniIndex], (int)(hitBox.x - xDrawOffset) - lvlOffset, (int)(hitBox.y - yDrawOffset), width, height, null);
 		//drawHitbox(g , lvlOffset);
+		
+		drawUI(g);
+	}
+
+	private void drawUI(Graphics g) {
+		g.drawImage(statusBarImg, statusBarX, statusBarY, statusBarWidth, statusBarHeight, null);
+		g.setColor(healthRed);
+		g.fillRect(healthBarXStart + statusBarX, healthBarYStart + statusBarY, healthWidth, healthBarHeight);
 	}
 
 	private void updateAnimationTick() {
@@ -140,6 +173,17 @@ public class Player extends Entity {
 		}
 		
 	}
+	
+	private void changeHealth(int value) {
+		currentHealth += value;
+		
+		if(currentHealth <= 0) {
+			currentHealth = 0;
+			//gameOver();
+		}
+		else if(currentHealth >= maxHealth)
+			currentHealth = maxHealth;
+	}
 
 	private void resetInAir() {
 		inAir = false;
@@ -160,9 +204,10 @@ public class Player extends Entity {
 			animations = new BufferedImage[10][8];
 			
 			for(int i=0; i < animations.length; i++)
-				for(int j=0; j < animations[i].length; j++) {
+				for(int j=0; j < animations[i].length; j++)
 					animations[i][j] = img.getSubimage(j*32, i*32, 32, 32);	
-				}
+			
+			statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
 	}
 	
 	public void loadLvlData(int[][] lvlData) {
