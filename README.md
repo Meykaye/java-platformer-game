@@ -33,7 +33,13 @@ I aim to build a classic 2D platformer game using Java. The game will involve a 
 ### 5. Pause Menu and Buttons (31/8/2023)
 
 - Added Pause menu and buttons
-- Buttons interact with mouse clicks and hovers 
+- Buttons interact with mouse clicks and hovers
+
+### 6. Enemies, Hitbox and Combat system (10/09/2023)
+
+- Added slimes as enemies
+- Added hitbox to enemies and player
+- Developed a simple combat system and made a health bar system
 
 ## Future plans
 
