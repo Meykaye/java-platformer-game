@@ -2,6 +2,10 @@ package entities;
 
 import static utilz.Constants.EnemyConstants.*;
 import static utilz.HelpMethods.*;
+
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
+
 import static utilz.Constants.Directions.*;
 
 import main.Game;
@@ -13,15 +17,21 @@ public abstract class Enemy extends Entity{
 	protected boolean inAir;
 	protected float fallSpeed; 
 	protected float gravity = 0.04f * Game.SCALE;
-	protected float walkSpeed = 0.2f * Game.SCALE;
+	protected float walkSpeed = 0.25f * Game.SCALE;
 	protected float walkDir = LEFT;
 	protected int tileY;
 	protected float attackRange = 33;
+	protected int maxHealth;
+	protected int currentHealth;
+	protected boolean active = true;
+	protected boolean attackChecked;
 	
 	public Enemy(float x, float y, int width, int height, int enemyType) {
 		super(x, y, width, height);
 		this.enemyType = enemyType;
 		initHitbox(x, y, width, height);
+		maxHealth = GetMaxHealth(enemyType);
+		currentHealth = maxHealth;
 	}
 	
 	protected void firstUpdateCheck(int[][] lvlData) {
@@ -96,6 +106,21 @@ public abstract class Enemy extends Entity{
 		aniIndex = 0;
 	}
 	
+	public void hurt(int amount) {
+		currentHealth -= amount;
+		if(currentHealth <= 0 )
+			newState(DYING);
+		else
+			newState(HITTING);
+	}
+	
+	protected void checkPlayerHit(Rectangle2D.Float attackBox, Player player) {
+		if(attackBox.intersects(player.hitBox))
+			player.changeHealth(-GetEnemyDmg(enemyType));
+		attackChecked = true;
+		
+	}
+	
 	protected void updateAnimationTick() {
 		aniTick++;
 		if(aniTick >= aniSpeed) {
@@ -103,8 +128,17 @@ public abstract class Enemy extends Entity{
 			aniIndex++;
 			if(aniIndex >= GetSpriteAmt(enemyType, enemyState)) {
 				aniIndex = 0;
-				if(enemyState == ATTACKING)
-					enemyState = IDLE;
+				
+				switch(enemyState) {
+					case ATTACKING, HITTING -> enemyState = IDLE;
+					case DYING -> active = false;
+				}
+//				if(enemyState == ATTACKING)
+//					enemyState = IDLE;
+//				else if(enemyState == HITTING)
+//					enemyState = IDLE;
+//				else if(enemyState == DYING)
+//					active = false;
 			}
 		}	
 	}
@@ -115,6 +149,16 @@ public abstract class Enemy extends Entity{
 		else
 			walkDir = LEFT;
 	}
+	
+	public void resetEnemy() {
+		hitBox.x = x;
+		hitBox.y = y;
+		firstUpdate = true;
+		currentHealth = maxHealth;
+		newState(IDLE);
+		active = true;
+		fallSpeed = 0;
+	}
 
 	public int getAniIndex() {
 		return aniIndex;
@@ -122,5 +166,9 @@ public abstract class Enemy extends Entity{
 	
 	public int getEnemyState() {
 		return enemyState;
+	}
+	
+	public boolean isActive() {
+		return active;
 	}
 }

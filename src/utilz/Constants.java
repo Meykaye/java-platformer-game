@@ -25,8 +25,8 @@ public class Constants {
 		public static final int MONSTER_WIDTH = (int) (MONSTER_DEFAULT_WIDTH * Game.SCALE);
 		public static final int MONSTER_HEIGHT = (int) (MONSTER_DEFAULT_HEIGHT * Game.SCALE);
 		
-		public static final int MONSTER_DRAWOFFSET_X = (int) (7* Game.SCALE); //26
-		public static final int MONSTER_DRAWOFFSET_Y = (int) (19* Game.SCALE); //9
+		public static final int MONSTER_DRAWOFFSET_X = (int) (1* Game.SCALE); //26
+		public static final int MONSTER_DRAWOFFSET_Y = (int) (14* Game.SCALE); //9
 		
 		public static int GetSpriteAmt(int enemy_type, int enemy_state) {
 			switch(enemy_type) {
@@ -42,6 +42,24 @@ public class Constants {
 				}
 			}
 			return 0;
+		}
+		
+		public static int GetMaxHealth(int enemy_type) {
+			switch(enemy_type) {
+			case MONSTER:
+				return 10;
+			default:
+				return 1;
+			}
+		}
+		
+		public static int GetEnemyDmg(int enemy_type) {
+			switch(enemy_type) {
+			case MONSTER:
+				return 15;
+			default:
+				return 0;
+			}
 		}
 	}
 	
