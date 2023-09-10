@@ -82,7 +82,7 @@ public class Player extends Entity {
 	}
 	
 	private void checkAttack() {
-		if(attackChecked || aniIndex != 2)
+		if(attackChecked || aniIndex != 3)
 			return;
 		attackChecked = true;
 		playing.checkEnemyHit(attackBox);
@@ -110,8 +110,8 @@ public class Player extends Entity {
 				(int)(hitBox.x - xDrawOffset) - lvlOffset + flipX, 
 				(int)(hitBox.y - yDrawOffset), 
 				width * flipW, height, null);
-		drawHitbox(g , lvlOffset);
-		drawAttackBox(g, lvlOffset);
+		//drawHitbox(g , lvlOffset);
+		//drawAttackBox(g, lvlOffset);
 		drawUI(g);
 	}
 
@@ -160,7 +160,7 @@ public class Player extends Entity {
 		if(attacking) {
 			playerAction = ATTACK;
 			if(startAni != ATTACK) {
-				aniIndex = 2;
+				aniIndex = 3;
 				aniTick = 0;
 				return;
 			}

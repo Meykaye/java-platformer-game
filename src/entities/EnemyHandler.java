@@ -44,8 +44,8 @@ public class EnemyHandler {
 						(int) m.getHitbox().x - MONSTER_DRAWOFFSET_X - xLvlOffset + m.flipX(), 
 						(int) (m.getHitbox().y - MONSTER_DRAWOFFSET_Y), 
 						MONSTER_WIDTH * m.flipW(), MONSTER_HEIGHT, null);
-				m.drawHitbox(g, xLvlOffset);
-				m.drawAttackBox(g, xLvlOffset);
+				//m.drawHitbox(g, xLvlOffset);
+				//m.drawAttackBox(g, xLvlOffset);
 			}
 	}
 	

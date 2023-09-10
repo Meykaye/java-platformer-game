@@ -26,7 +26,7 @@ public class Constants {
 		public static final int MONSTER_HEIGHT = (int) (MONSTER_DEFAULT_HEIGHT * Game.SCALE);
 		
 		public static final int MONSTER_DRAWOFFSET_X = (int) (1* Game.SCALE); //26
-		public static final int MONSTER_DRAWOFFSET_Y = (int) (14* Game.SCALE); //9
+		public static final int MONSTER_DRAWOFFSET_Y = (int) (12* Game.SCALE); //9
 		
 		public static int GetSpriteAmt(int enemy_type, int enemy_state) {
 			switch(enemy_type) {
