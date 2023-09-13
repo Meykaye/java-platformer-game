@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics;
 import gamestates.Gamestates;
+import utilz.LoadSave;
 import gamestates.*;
 
 public class Game implements Runnable{
@@ -28,6 +29,7 @@ public class Game implements Runnable{
 		
 		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);
+		gamePanel.setFocusable(true);
 		gamePanel.requestFocus();
 		
 		startGameLoop();

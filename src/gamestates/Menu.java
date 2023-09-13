@@ -104,6 +104,4 @@ public class Menu extends States implements Statemethods{
 		// TODO Auto-generated method stub
 		
 	}
-
-	
 }

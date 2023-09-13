@@ -12,6 +12,7 @@ import entities.Player;
 import levels.LevelHandler;
 import main.Game;
 import ui.GameOverOverlay;
+import ui.LevelCompletedOverlay;
 import ui.PauseOverlay;
 import utilz.LoadSave;
 import static utilz.Constants.Environment.*;
@@ -22,16 +23,18 @@ public class Playing extends States implements Statemethods{
 	private LevelHandler levelHandler;
 	private EnemyHandler enemyHandler;
 	private GameOverOverlay gameOverOverlay;
+	private LevelCompletedOverlay levelCompletedOverlay;
 	private boolean paused = false;
 	private PauseOverlay pauseOverlay;
 	private int xLvlOffset;
 	private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
 	private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
-	private int lvlTilesWide = LoadSave.GetLevelData()[0].length; //getting width from the function
-	private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
-	private int maxLvlOffsetX = maxTilesOffset * Game.TILES_SIZE;
+//	private int lvlTilesWide = LoadSave.GetLevelData()[0].length; //getting width from the function
+//	private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
+	private int maxLvlOffsetX;
 	private BufferedImage backgroundImg1, backgroundImg2, backgroundImg3, dripstone; // background images
 	private boolean gameOver;
+	private boolean lvlCompleted;
 	
 	public Playing(Game game) {
 		super(game);
@@ -41,8 +44,26 @@ public class Playing extends States implements Statemethods{
 		backgroundImg2 = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUNDIMG_2);
 		backgroundImg3 = LoadSave.GetSpriteAtlas(LoadSave.BACKGROUNDIMG_3);
 		dripstone = LoadSave.GetSpriteAtlas(LoadSave.DRIPSTONE);
+		
+		calcLvlOffset();
+		loadStartLevel();
 	}
 	
+	public void loadNextLevel() {
+		resetAll();
+		levelHandler.loadNextLevel();
+	}
+	
+	private void loadStartLevel() {
+		enemyHandler.loadEnemies(levelHandler.getCurrentLevel());
+		
+	}
+
+	private void calcLvlOffset() {
+		maxLvlOffsetX = levelHandler.getCurrentLevel().getLvlOffset();
+		
+	}
+
 	private void initClasses() {
 		levelHandler = new LevelHandler(game);
 		enemyHandler = new EnemyHandler(this);
@@ -50,18 +71,22 @@ public class Playing extends States implements Statemethods{
 		player.loadLvlData(levelHandler.getCurrentLevel().getLevelData());
 		pauseOverlay = new PauseOverlay(this);
 		gameOverOverlay = new GameOverOverlay(this);
+		levelCompletedOverlay = new LevelCompletedOverlay(this);
 	}
 
 	public void update() {
-		if(!paused && !gameOver) {
+		
+		if(paused)
+			pauseOverlay.update();
+		
+		else if(lvlCompleted)
+			levelCompletedOverlay.update();
+		
+		else if (!gameOver){
 			levelHandler.update();
 			player.update();
 			enemyHandler.update(levelHandler.getCurrentLevel().getLevelData(), player);
 			checkBorder();
-		}
-		
-		else {
-			pauseOverlay.update();
 		}
 	}
 
@@ -97,9 +122,11 @@ public class Playing extends States implements Statemethods{
 			g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
 			pauseOverlay.draw(g);
 		}
-		else if(gameOver) {
+		else if(gameOver)
 			gameOverOverlay.draw(g);
-		}
+		
+		else if(lvlCompleted)
+			levelCompletedOverlay.draw(g);
 	}
 
 	private void drawPillars(Graphics g) {
@@ -117,9 +144,18 @@ public class Playing extends States implements Statemethods{
 		//resetting enemy, player and level
 		gameOver = false;
 		paused = false;
+		lvlCompleted = false;
 		player.resetAll();
 		enemyHandler.resetAllEnemies();
 		
+	}
+	
+	public void setLevelCompleted(boolean levelCompleted) {
+		this.lvlCompleted = levelCompleted; 
+	}
+	
+	public void setMaxLvlOffset(int lvlOffset) {
+		this.maxLvlOffsetX = lvlOffset;
 	}
 	
 	public void setGameOver(boolean gameOver) {
@@ -137,21 +173,30 @@ public class Playing extends States implements Statemethods{
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if(!gameOver)
+		if(!gameOver) {
 			if(paused)
 				pauseOverlay.mousePressed(e);
+			else if(lvlCompleted)
+				levelCompletedOverlay.mousePressed(e);
+		}
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if(!gameOver)
+		if(!gameOver) {
 			if(paused)
 				pauseOverlay.mouseReleased(e);
+			else if(lvlCompleted)
+				levelCompletedOverlay.mouseReleased(e);
+		}
 	}
 
 	public void mouseMoved(MouseEvent e) {
-		if(!gameOver)
+		if(!gameOver) {
 			if(paused)
 				pauseOverlay.mouseMoved(e);
+			else if(lvlCompleted)
+				levelCompletedOverlay.mouseMoved(e);
+		}	
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -212,6 +257,10 @@ public class Playing extends States implements Statemethods{
 	
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public EnemyHandler getEnemyHandler() {
+		return enemyHandler;
 	}
 	
 }
