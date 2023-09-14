@@ -52,6 +52,7 @@ public class Playing extends States implements Statemethods{
 	public void loadNextLevel() {
 		resetAll();
 		levelHandler.loadNextLevel();
+		player.setSpawn(levelHandler.getCurrentLevel().getPlayerSpawn());
 	}
 	
 	private void loadStartLevel() {
@@ -69,6 +70,7 @@ public class Playing extends States implements Statemethods{
 		enemyHandler = new EnemyHandler(this);
 		player = new Player(200, 200,(int) (32*Game.SCALE),(int) (32*Game.SCALE), this);
 		player.loadLvlData(levelHandler.getCurrentLevel().getLevelData());
+		player.setSpawn(levelHandler.getCurrentLevel().getPlayerSpawn());
 		pauseOverlay = new PauseOverlay(this);
 		gameOverOverlay = new GameOverOverlay(this);
 		levelCompletedOverlay = new LevelCompletedOverlay(this);
