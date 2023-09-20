@@ -12,12 +12,11 @@ import main.Game;
 
 public class Monster extends Enemy{
 
-	private Rectangle2D.Float attackBox;
 	private int attackBoxOffsetX;
 	
 	public Monster(float x, float y) {
 		super(x, y, MONSTER_WIDTH, MONSTER_HEIGHT, MONSTER);
-		initHitbox(x, y, (int)(30 * Game.SCALE), (int)(19 * Game.SCALE));
+		initHitbox(30, 19);
 		initAttackBox();
 	}
 	
@@ -46,7 +45,7 @@ public class Monster extends Enemy{
 			updateInAir(lvlData);
 			
 		else {
-			switch(enemyState) {
+			switch(state) {
 			case IDLE:
 				newState(WALKING); break;
 			case WALKING:
@@ -67,11 +66,6 @@ public class Monster extends Enemy{
 				break;
 			}
 		}
-	}
-
-	public void drawAttackBox(Graphics g, int xLvlOffset) {
-		g.setColor(Color.MAGENTA);
-		g.drawRect((int) (attackBox.x - xLvlOffset), (int) (attackBox.y), (int) (attackBox.width), (int) (attackBox.height));
 	}
 	
 	public int flipX() {

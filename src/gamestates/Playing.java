@@ -206,14 +206,8 @@ public class Playing extends States implements Statemethods{
 			gameOverOverlay.keyPressed(e);
 		else
 			switch(e.getKeyCode()) {
-			case KeyEvent.VK_W:
-				player.setUp(true);
-				break;
 			case KeyEvent.VK_A:
 				player.setLeft(true);
-				break;
-			case KeyEvent.VK_S:
-				player.setDown(true);
 				break;
 			case KeyEvent.VK_D:
 				player.setRight(true);
