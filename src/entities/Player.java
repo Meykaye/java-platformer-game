@@ -53,7 +53,7 @@ public class Player extends Entity {
 		this.playing = playing;
 		this.state = IDLE;
 		this.maxHealth = 100;
-		this.currentHealth = maxHealth;
+		this.currentHealth = 35;
 		this.walkSpeed = Game.SCALE * 0.95f;
 		loadAnimations();
 		initHitbox(14, 26);
@@ -80,18 +80,24 @@ public class Player extends Entity {
 		}
 		updateAttackBox();
 		updatePos();
+		if(moving)
+			checkCrystalTouched();
 		if(attacking)
 			checkAttack();
 		updateAnimationTick();
 		setAnimation();
 	}
 	
+	private void checkCrystalTouched() {
+		playing.checkCrystalTouched(hitBox);
+	}
+
 	private void checkAttack() {
 		if(attackChecked || aniIndex != 3)
 			return;
 		attackChecked = true;
 		playing.checkEnemyHit(attackBox);
-		
+		playing.checkObjectHit(attackBox);
 	}
 
 	private void updateAttackBox() {
@@ -236,7 +242,7 @@ public class Player extends Entity {
 		
 	}
 	
-	protected void changeHealth(int value) {
+	public void changeHealth(int value) {
 		currentHealth += value;
 		
 		if(currentHealth <= 0) {
@@ -245,6 +251,10 @@ public class Player extends Entity {
 		}
 		else if(currentHealth >= maxHealth)
 			currentHealth = maxHealth;
+	}
+	
+	public void changePower(int value) {
+		System.out.println("Added Power");
 	}
 
 	private void resetInAir() {

@@ -35,6 +35,8 @@ public class LoadSave {
 	public static final String MONSTER_SPRITE = "slime_sprite.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 	public static final String COMPLETED_IMG = "completed_sprite.png";
+	public static final String CRYSTALS = "crystals_sprite.png";
+	public static final String CONTAINERS = "objects_sprites.png";
 	
 	
 	public static BufferedImage GetSpriteAtlas(String fileName) {

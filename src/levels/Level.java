@@ -10,12 +10,16 @@ import static utilz.HelpMethods.GetPlayerSpawn;
 
 import entities.Monster;
 import main.Game;
+import objects.*;
+import utilz.HelpMethods;
 
 public class Level {
 
 	private BufferedImage img;
 	private int[][] lvlData;
 	private ArrayList<Monster> monsters;
+	private ArrayList<Crystal> crystals;
+	private ArrayList<GameContainer> containers;
 	private int lvlTilesWide;
 	private int maxTilesOffset;
 	private int maxLvlOffset;
@@ -25,8 +29,18 @@ public class Level {
 		this.img = img;
 		createLevelData();
 		createEnemies();
+		createCrystals();
+		createContainers();
 		calculateLvlOffsets();
 		calculatePlayerSpawn();
+	}
+	
+	private void createContainers() {
+		containers = HelpMethods.getGameContainers(img);
+	}
+
+	private void createCrystals() {
+		crystals = HelpMethods.getCrystals(img);
 	}
 	
 	private void calculatePlayerSpawn() {
@@ -67,5 +81,13 @@ public class Level {
 
 	public Point getPlayerSpawn() {
 		return playerSpawn;
+	}
+	
+	public ArrayList<Crystal> GetCrystals() {
+		return crystals;
+	}
+	
+	public ArrayList<GameContainer> GetGameContainers() {
+		return containers;
 	}
 }

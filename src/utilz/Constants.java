@@ -6,6 +6,36 @@ public class Constants {
 	
 	public static final float GRAVITY = 0.04f * Game.SCALE;
 	
+	public static class ObjectConstants {
+		public static final int PURPLE_CRYS = 0;
+		public static final int COLORED_CRYS = 1;
+		public static final int BARREL = 2;
+		public static final int BOX = 3;
+		
+		public static final int PURPLE_CRYS_VALUE = 10;
+		public static final int COLORED_CRYS_VALUE = 15;
+		
+		public static final int CONTAINER_DEFAULT_WIDTH = 40;
+		public static final int CONTAINER_DEFAULT_HEIGHT = 30;
+		public static final int CONTAINER_WIDTH = (int) (Game.SCALE * CONTAINER_DEFAULT_WIDTH);
+		public static final int CONTAINER_HEIGHT = (int) (Game.SCALE * CONTAINER_DEFAULT_HEIGHT);
+		
+		public static final int CRYSTAL_DEFAULT_WIDTH = 16;
+		public static final int CRYSTAL_DEFAULT_HEIGHT = 16;
+		public static final int CRYSTAL_WIDTH = (int) (Game.SCALE * CRYSTAL_DEFAULT_WIDTH);
+		public static final int CRYSTAL_HEIGHT = (int) (Game.SCALE * CRYSTAL_DEFAULT_HEIGHT);
+		
+		public static int GetSpriteAmt(int object_type) {
+			switch(object_type) {
+			case PURPLE_CRYS, COLORED_CRYS:
+				return 24;
+			case BARREL, BOX:
+				return 8;
+			}
+			return 1;
+		}
+	}
+	
 	public static class EnemyConstants {
 		public static final int MONSTER = 0;
 		
@@ -14,11 +44,6 @@ public class Constants {
 		public static final int ATTACKING = 3;
 		public static final int HITTING = 2;
 		public static final int DYING = 1;
-		
-//		public static final int IDLE = 0;
-//		public static final int ATTACKING = 1;
-//		public static final int HITTING = 2;
-//		public static final int DYING = 3;
 		
 		
 		public static final int MONSTER_DEFAULT_WIDTH = 32;
